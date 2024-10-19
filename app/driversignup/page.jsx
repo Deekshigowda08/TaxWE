@@ -5,11 +5,36 @@ import Link from 'next/link'
 import taxwelogo from '../public/taxwelogo2.svg'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const page = () => {
 
   const [showpass, setShowpass] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async(data) => {
+    const result= await fetch("/api/user", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({username:data.username,email:data.email,password:data.password,usertype:"user",phonenumber:data.phonenumber})
+    })
+    if(result.ok){
+      toast("Done!")
+      setTimeout(() => {
+        window.location.replace("/")
+      }, 2000);
+    }
+  };
 
   return (
     <div className='h-[100vh] overflow-hidden max-sm:pl-0 max-sm:pr-0 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] flex pl-10 pr-14 justify-center items-center navshad'>

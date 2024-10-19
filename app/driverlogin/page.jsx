@@ -50,16 +50,6 @@ const page = () => {
               </button>
           </Link>
           </div>
-          <div class="mb-4">
-            <label class="block text-[#ffffffe5] text-lg max-sm:text-sm font-bold mb-1" for="username">
-              Vehicle register no.
-            </label>
-            <input class="shadow max-sm:text-sm bg-[#ffffff35] font-medium text-[#000000d4] appearance-none rounded-lg w-full h-[50px] max-sm:h-[40px] px-3 leading-tight outline-none focus:outline-2 focus:outline-[#ffffff] smooth placeholder:text-[#00000078]"
-              id="username"
-              type="text"
-              placeholder="Enter your vehicle plate nummber" />
-          </div>
-          
           <div class="flex items-center ">
             <button class=" bg-[#3581d8] max-sm:text-sm smooth hover:text-[#000000be] hover:bg-[#ffffff] btnshad text-white font-bold py-2 px-5 rounded-md focus:outline-none focus:shadow-outline" type="button">
               Submit
