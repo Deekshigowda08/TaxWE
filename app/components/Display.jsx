@@ -42,6 +42,9 @@ const Display = () => {
   const [isCityOpen, setIsCityOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState("Select nearest City");
 
+  const [isCityOpen2, setIsCityOpen2] = useState(false);
+  const [selectedCity2, setSelectedCity2] = useState("Select nearest City");
+
   const [cities, setCities] = useState([]);
 
   const [processing, setProcessing] = useState(false);
@@ -50,12 +53,15 @@ const Display = () => {
     setSelectedState(option);
     setIsStateOpen(false);
     setCities(stateCityData[option]);
-    setSelectedCity("Select City");
   };
 
   const handleCityOptionClick = (option) => {
     setSelectedCity(option);
     setIsCityOpen(false);
+  };
+  const handleCityOptionClick2 = (option) => {
+    setSelectedCity2(option);
+    setIsCityOpen2(false);
   };
 
   return (
@@ -66,7 +72,7 @@ const Display = () => {
           <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col '>
 
             <div className="relative inline-block w-full">
-              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>From: Select State</div>
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Select State</div>
               <button
                 onClick={() => setIsStateOpen(!isStateOpen)}
                 className="w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
@@ -95,13 +101,20 @@ const Display = () => {
             </div>
 
             <div className="relative inline-block w-full">
-              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>From: Select City</div>
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Date</div>
+              <input required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="date" />
+            </div>
+          </div>
+          <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col '>
+
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>From</div>
 
               <button
                 onClick={() => setIsCityOpen(!isCityOpen)}
                 className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""
                   }`}
-                disabled={!selectedState || selectedState === "Select State"}
+                disabled={!selectedState }
               >
                 {selectedCity}
                 <span className="absolute inset-y-0 right-4 flex items-center text-white text-md">
@@ -125,77 +138,30 @@ const Display = () => {
                 </ul>
               )}
             </div>
-          </div>
-
-          <form>
-            <div className="">
-              <label className="block text-[#000000bb] text-lg font-bold " htmlFor="destination">
-                Pick-up Point
-              </label>
-              <input
-                className={`border-2 border-[#00000063] text-md bg-[#ffffff35] font-medium text-[#000000d4] appearance-none rounded-lg w-full h-[50px] px-3 leading-tight outline-none focus:outline-2 focus:outline-[#ffffff] placeholder:text-[#00000078] ${!selectedCity || !selectedState || selectedState === "Select State" || selectedCity === "Select City" ? "cursor-not-allowed opacity-50" : ""
-                  }`}
-                id="pickup"
-                type="text"
-                placeholder="Enter your pick-up address"
-                disabled={!selectedCity || !selectedState || selectedState === "Select State" || selectedCity === "Select City"}
-              />
-            </div>
-          </form>
-          <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col '>
 
             <div className="relative inline-block w-full">
-              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>To: Select State</div>
-              <button
-                onClick={() => setIsStateOpen(!isStateOpen)}
-                className="w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
-              >
-                {selectedState}
-                <span className="absolute inset-y-0 right-4 flex items-center text-white text-md">
-                  <FaChevronDown
-                    className={`transform transition-transform duration-300 ${isStateOpen ? "rotate-180" : "rotate-0"}`}
-                  />
-                </span>
-              </button>
-
-              {isStateOpen && (
-                <ul className="absolute z-10 w-full bg-white selshad rounded-xl mt-2 overflow-auto max-h-40">
-                  {Object.keys(stateCityData).map((state, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handleStateOptionClick(state)}
-                      className="px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#0ab9cf] hover:to-[#3581d8] hover:text-white cursor-pointer"
-                    >
-                      {state}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            <div className="relative inline-block w-full">
-              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>To: Select City</div>
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>To</div>
 
               <button
-                onClick={() => setIsCityOpen(!isCityOpen)}
+                onClick={() => setIsCityOpen2(!isCityOpen2)}
                 className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""
                   }`}
                 disabled={!selectedState || selectedState === "Select State"}
               >
-                {selectedCity}
+                {selectedCity2}
                 <span className="absolute inset-y-0 right-4 flex items-center text-white text-md">
                   <FaChevronDown
-                    className={`transform transition-transform duration-300 ${isCityOpen ? "rotate-180" : "rotate-0"}`}
+                    className={`transform transition-transform duration-300 ${isCityOpen2 ? "rotate-180" : "rotate-0"}`}
                   />
                 </span>
               </button>
 
-              {isCityOpen && (
+              {isCityOpen2 && (
                 <ul className="absolute z-10 w-full bg-white selshad rounded-xl mt-2 overflow-auto max-h-40">
                   {cities.map((city, index) => (
                     <li
                       key={index}
-                      onClick={() => handleCityOptionClick(city)}
+                      onClick={() => handleCityOptionClick2(city)}
                       className="px-4 py-3 text-gray-700 hover:bg-gradient-to-r hover:from-[#0ab9cf] hover:to-[#3581d8] hover:text-white cursor-pointer"
                     >
                       {city}
@@ -206,21 +172,6 @@ const Display = () => {
             </div>
             
           </div>
-          <form>
-            <div className="">
-              <label className="block text-[#000000bb] text-lg font-bold " htmlFor="destination">
-                Destination
-              </label>
-              <input
-                className={`border-2 border-[#00000063] text-md bg-[#ffffff35] font-medium text-[#000000d4] appearance-none rounded-lg w-full h-[50px] px-3 leading-tight outline-none focus:outline-2 focus:outline-[#ffffff] placeholder:text-[#00000078] ${!selectedCity || !selectedState || selectedState === "Select State" || selectedCity === "Select City" ? "cursor-not-allowed opacity-50" : ""
-                  }`}
-                id="destination"
-                type="text"
-                placeholder="Enter your destination"
-                disabled={!selectedCity || !selectedState || selectedState === "Select State" || selectedCity === "Select City"}
-              />
-            </div>
-          </form>
           <button
             onClick={() => setProcessing(true)}
             className='w-full  items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] smooth hover:text-[#000000be] btnshad text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'>Find Drivers</button>

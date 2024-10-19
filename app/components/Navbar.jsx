@@ -5,8 +5,7 @@ import taxwelogo from '../public/taxwelogo2.svg'
 
 const Navbar = () => {
     return (
-        <nav className='sticky top-0 right-0 z-50 h-[70px] max-sm:h-[50px] bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] flex items-center pl-10 pr-14 max-sm:pl-5 max-sm:pr-7 justify-between navshad'>
-
+        <nav className=' sticky top-0 right-0 z-50 h-[70px] max-sm:h-[50px] bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] flex items-center pl-10 pr-14 max-sm:pl-5 max-sm:pr-7 justify-between navshad'>
             <div className=''>
                 <Image src={taxwelogo} alt="Logo" width={88} />
             </div>

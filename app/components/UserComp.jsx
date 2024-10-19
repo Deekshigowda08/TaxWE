@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 
 const UserComp = ({ username, email }) => {
     return (
-        <div className=' p-1 bg-gradient-to-br from-[#06e2ff] to-[#3581d8] h-[80px] max-sm:h-[70px]'>
+        <div className='font-serif p-1 bg-gradient-to-br from-[#06e2ff] to-[#3581d8] h-[80px] max-sm:h-[70px]'>
             <div className='w-full h-full bg-[#ffffff] rounded-lg px-5 flex items-center gap-7 max-sm:gap-2 justify-between relative'>
                 <div className='flex items-center gap-2 '>
                     <div className='p-1 max-sm:p-[2px] rounded-full bg-gradient-to-br from-[#06e2ff] to-[#3581d8]'>
