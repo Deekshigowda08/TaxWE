@@ -2,26 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body::-webkit-scrollbar{
+  background-color: #00000000;
+}
+@media screen and (max-width: 600px) {
+  body::-webkit-scrollbar{
+    background-color: #00000000;
+    width: 3vw;
+  }
+}
+body::-webkit-scrollbar-thumb{
+  background: linear-gradient(#3581d8, #06e2ff);
+  border-radius: 0 0 2vw 2vw;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+.smooth{
+  transition: all 0.5s ease;
+}
+
+.befaft::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ffffff;
+}
+
+.befaft:hover::after{
+  animation: wztoh 0.3s ease-in-out 1;
+  width: 100%;
+
+}
+
+.befaft:active:after{
+  background: #ffffff;
+}
+
+@keyframes wztoh {
+  from {
+      width: 0;
+  }
+  to {
+      width: 100%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.navshad{
+  box-shadow: 0px 0px 7px 1px  #00000069;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.lsshad{
+  box-shadow: 0px 0px 7px 1px  #00000018;
+}
+
+.btnshad{
+  box-shadow: 0px 0px 4px 1px  #0000000f;
+}
+
+.selshad{
+  box-shadow: 0px 0px 7px 1px  #00000027;
+
+}
+
+.maintxt{
+  background: linear-gradient(to right,#0ab9cf, #3581d8);
+  background: -o-linear-gradient(right, #3581d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Add this to your global styles (e.g., styles/globals.css) */
+.loader div {
+  border-top-color: transparent; /* Hide the top border */
+  border-image: linear-gradient(to right, #0ab9cf, #3581d8) 1; 
+  border-width: 4px; 
+  border-style: solid; 
+  animation: spin 1s linear infinite; 
+}
+
+.loader{  
+  border-radius: 50%;
+}
+
+/* Define the keyframes for spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
