@@ -21,8 +21,8 @@ export async function POST(req){
 	await mongoose.connect(process.env.DB_URL)
 	const useraccount=await user.findOne({"email":payload.email})
     const driveraccount=await driver.findOne({"email":payload.email})
-    if(useraccount && payload.usertype=="user"){
-	   var bytes  = CryptoJS.AES.decrypt(useraccount.password, '@deekshigowda');
+    if(useraccount ){
+	   var bytes  = CryptoJS.AES.decrypt(useraccount.password, '@teamwe_08');
 	   var originalText = bytes.toString(CryptoJS.enc.Utf8);
 		if(payload.email== useraccount.email){
 			transporter.sendMail(
@@ -38,8 +38,8 @@ export async function POST(req){
 		}
 
 	}
-    else if(driveraccount && payload.usertype=="driver"){
-        var bytes  = CryptoJS.AES.decrypt(driveraccount.password, '@deekshigowda');
+    else if(driveraccount){
+        var bytes  = CryptoJS.AES.decrypt(driveraccount.password, '@teamwe_08');
         var originalText = bytes.toString(CryptoJS.enc.Utf8);
         
         console.log();

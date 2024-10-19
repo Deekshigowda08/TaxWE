@@ -15,18 +15,18 @@ const Navbar = () => {
                 <Link href={'/'} className='' >
                     <span className='relative befaft p-1'>HOME</span>
                 </Link>
-                {/* <Link href={'/about'} className='' >
+                <Link href={'/about'} className='' >
                     <span className='relative befaft p-1'>ABOUT</span>
                 </Link>
                 <Link href={'/github'} className='' >
                     <span className='relative befaft p-1'>GITHUB</span>
-                </Link> */}
-                <Link href={'/passengersignup'} className='' >
+                </Link>
+                {/* <Link href={'/passengersignup'} className='' >
                     <span className='relative befaft p-1'>SIGN-UP</span>
                 </Link>
                 <Link href={'/passengerlogin'} className='' >
                     <span className='relative befaft p-1'>LOG-IN</span>
-                </Link>
+                </Link> */}
                 
             </div>
         </nav>

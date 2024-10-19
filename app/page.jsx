@@ -34,12 +34,12 @@ const page = () => {
           return;
         }
     
-        const decoded = jwtDecode(token, '@deekshigowda'); 
+        const decoded = jwtDecode(token, '@teamwe_08'); 
         if (!decoded) {
           console.error('Token verification failed');
           return;
         }
-        var bytes  = CryptoJS.AES.decrypt(decoded.password, '@deekshigowda');
+        var bytes  = CryptoJS.AES.decrypt(decoded.password, '@teamwe_08');
         var originalText = bytes.toString(CryptoJS.enc.Utf8);
         const data = await fetch("/api/login", {
           method: "post",

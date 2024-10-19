@@ -4,6 +4,9 @@ const listschema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"drivers"
     },
+    date:{
+        type:Date
+    },
     form:{
         type:String,
         required:true

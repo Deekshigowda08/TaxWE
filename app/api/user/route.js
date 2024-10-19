@@ -10,7 +10,7 @@ export async function POST(req){
     if (process.env) {
         console.log("done");
         await mongoose.connect(process.env.DB_URL)
-        const toconnect=await new user({username,email,phonenumber,password:CryptoJS.AES.encrypt(password, '@deekshigowda').toString(),usertype});
+        const toconnect=await new user({username,email,phonenumber,password:CryptoJS.AES.encrypt(password, '@teamwe_08').toString(),usertype});
 	    const result=await toconnect.save();
         return NextResponse.json({result,success:true});
     }

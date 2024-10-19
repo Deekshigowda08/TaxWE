@@ -1,10 +1,13 @@
-import React from 'react'
+"use client"
+import React,{useState,useEffect} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import cprofl from '../public/cat.jpeg'
 import { IoMenu } from "react-icons/io5"; 
+import { jwtDecode } from "jwt-decode";
 
-const UserComp = () => {
+
+const UserComp = ({ username, email }) => {
     return (
         <div className=' p-1 bg-gradient-to-br from-[#06e2ff] to-[#3581d8] h-[80px] max-sm:h-[70px]'>
             <div className='w-full h-full bg-[#ffffff] rounded-lg px-5 flex items-center gap-7 max-sm:gap-2 justify-between relative'>
@@ -15,8 +18,8 @@ const UserComp = () => {
                     </div>
                     {/* <div className='p-1 bg bg-gradient-to-br from-[#06e2ff] to-[#3581d8] rounded-lg  '> */}
                         <div className='bg-[#ffffff] text-[#3b3b3b]  font-semibold rounded-md flex flex-col py-1 w-[220px] '>
-                            <span className='max-sm:text-[12px]'>123456789012</span>
-                            <span className='max-sm:text-[12px]'>123456789012@gmail.com</span>
+                            <span className='max-sm:text-[12px]'>{username}</span>
+                            <span className='max-sm:text-[12px]'>{email}</span>
                         </div>
                     {/* </div> */}
                 </div>
