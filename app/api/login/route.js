@@ -17,7 +17,7 @@ export async function POST(req){
 	   var originalText = bytes.toString(CryptoJS.enc.Utf8);
 	   
 		if(payload.email== useraccount.email && payload.password==originalText){
-			var token = jwt.sign({email:useraccount.email,username:useraccount.username,password:useraccount.password,usertype:useraccount.usertype}, '@teamwe_08');
+			var token = jwt.sign({objectid:useraccount._id,email:useraccount.email,username:useraccount.username,password:useraccount.password,usertype:useraccount.usertype}, '@teamwe_08');
 			return NextResponse.json({success:true,email:useraccount.email,username:useraccount.username,token:token});
 
 		}
@@ -31,7 +31,7 @@ export async function POST(req){
         var originalText = bytes.toString(CryptoJS.enc.Utf8);
         console.log();
          if(payload.email== driveraccount.email && payload.password==originalText){
-            var token = jwt.sign({email:driveraccount.email,username:driveraccount.username,password:driveraccount.password,usertype:driveraccount.usertype}, '@teamwe_08');
+            var token = jwt.sign({objectid:driveraccount._id,email:driveraccount.email,username:driveraccount.username,password:driveraccount.password,usertype:driveraccount.usertype}, '@teamwe_08');
              return NextResponse.json({success:true,email:driveraccount.email,username:driveraccount.username,token:token});
  
          }

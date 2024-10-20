@@ -5,17 +5,14 @@ const listschema=new mongoose.Schema({
         ref:"drivers"
     },
     date:{
-        type:Date
+        type:Date,
+        required:true
     },
     form:{
         type:String,
         required:true
     },
     to:{
-        type:String,
-        required:true
-    },
-    state:{
         type:String,
         required:true
     },
@@ -53,8 +50,10 @@ const listschema=new mongoose.Schema({
     vechiclenumber:{
         type:String,
         required:true
+    },
+    contactnumber:{
+        type:Number,
+        required:true
     }
-
-    
 },{timestamps:true})
 export const list = mongoose.models.lists||mongoose.model("lists",listschema)
