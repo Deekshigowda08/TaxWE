@@ -28,6 +28,9 @@ const listschema=new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: "users" 
         },
+        date:{
+            type:Date
+        },
         seats: {
           type: Number
         },

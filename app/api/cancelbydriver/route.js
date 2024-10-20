@@ -21,10 +21,9 @@ export async function POST(req) {
         await mongoose.connect(process.env.DB_URL);
 
         const storing = await list.findOne({ 
-            createdby: userid, 
+            createdby:userid, 
             'clients.client': new mongoose.Types.ObjectId(id)
         });
-
         if (!storing) {
             console.log('No document found for storing.');
             return NextResponse.json({ success: false, message: 'Document not found' });
