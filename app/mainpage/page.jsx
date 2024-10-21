@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 export default function Home() {
   const [username, setSetUsername] = useState("")
   const [email, setEmail] = useState("")
+  const [id, setid] = useState("")
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function Home() {
       const decoded = jwtDecode(token, '@teamwe_08'); 
       setSetUsername(decoded.username);
       setEmail(decoded.email);
+      setid(decoded.objectid)
     }else{
       window.location.replace(`/`)
     }
@@ -23,7 +25,7 @@ export default function Home() {
     <>
       <Navbar />
       <UserComp username={username} email={email}/>
-      <Display />
+      <Display id={id} />
     </>
   );
 }

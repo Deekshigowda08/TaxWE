@@ -25,7 +25,7 @@ const UserComp = ({ username, email }) => {
                 </div>
 
                     <div className='max-sm:hidden flex gap-10 items-center font-bold text-[#000000c5] max-sm:text-[15px] rounded-lg p-5 h-full'>
-                        <Link href={'/'} className='' >
+                        <Link href={'#'} className='' >
                             <span className=''>PREVIOUS TRIPS</span>
                         </Link>
                         <Link href={'/about'} className='' >

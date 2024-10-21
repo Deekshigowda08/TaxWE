@@ -387,7 +387,6 @@ export default function Home() {
 
                                 {trips.length > 0 ? (
                                     <div className='mt-5'>
-                                        {/* Section for Approved Clients */}
                                         {trips.map(trip => (
                                             trip.clients.length > 0 && (
                                                 <div key={trip._id}>

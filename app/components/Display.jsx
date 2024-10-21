@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const stateCityData = {
   "Andhra Pradesh": ["Amaravati", "Visakhapatnam", "Vijayawada"],
   "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat"],
@@ -32,8 +33,8 @@ const stateCityData = {
   "Uttarakhand": ["Dehradun", "Haridwar", "Nainital"],
   "West Bengal": ["Kolkata", "Siliguri", "Durgapur"],
 };
-
-const Display = () => {
+const Display = ({ id }) => {
+  const [dis, setdis] = useState(false)
   const [isStateOpen, setIsStateOpen] = useState(false);
   const [selectedState, setSelectedState] = useState("Select State");
   const [isCityOpen, setIsCityOpen] = useState(false);
@@ -44,7 +45,67 @@ const Display = () => {
   const [matches, setMatches] = useState([]);
   const [cities, setCities] = useState([]);
   const [processing, setProcessing] = useState(false);
-
+  const [setFound, setSetFound] = useState(false)
+  const [setselectedlist, setSetselectedlist] = useState()
+  const [seat, setseat] = useState()
+  const [values, setvalue] = useState([])
+  const [pickup, setpickup] = useState("")
+  const [found, setfound] = useState(false)
+  const submittheorder=async()=>{
+    const result=await fetch("/api/order", {
+      method: "post",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id:setselectedlist._id,userid:id,date,seats:seat,pickuplocation:pickup })
+  })
+  if(result.ok){
+    toast("Done!")
+    setTimeout(() => {
+      window.location.reload()
+    }, 2000);
+  }
+  }
+  const canceltheorder=async(id)=>{
+    const result=await fetch("/api/cancelbyuser", {
+      method: "post",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+  })
+  if(result.ok){
+    toast("Done your order had been canceled!")
+    setTimeout(() => {
+      window.location.reload()
+    }, 2000);
+  }
+  }
+  const mydetails=async()=>{
+    const result=await fetch("/api/userrequest", {
+      method: "post",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id})
+  })
+  const value=await result.json()
+  setvalue(value.clientDetails)
+  setdis(true)
+  setfound(false)
+  }
+  const handleapprove = (driverid) => {
+    matches.map(trip => {
+      if (trip.id === driverid) {
+        setSetselectedlist(trip)
+        console.log(trip);
+        setSetFound(true)
+      }
+    })
+  }
   const handleStateOptionClick = (option) => {
     setSelectedState(option);
     setIsStateOpen(false);
@@ -63,29 +124,38 @@ const Display = () => {
 
   const handleSubmit = async () => {
     setProcessing(true);
+    setdis(false)
     const detail = await fetch("/api/getdata", {
       method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ date, form: selectedCity, to: selectedCity2 }), // corrected "to" field
+      body: JSON.stringify({ date, form: selectedCity, to: selectedCity2 }),
     });
+
     const response = await detail.json();
+    console.log(response.trips);
     setMatches(response.trips);
+    setfound(true)
     
-    setProcessing(false); 
+    setProcessing(false);
   };
 
   return (
     <div className='w-full'>
       <div className='px-5 max-sm:px-1 text-center font-bold text-4xl maintxt max-sm:text-2xl'>
         Start a new trip!
-        <button className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">See orders</button>
-        <button className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">See existing trips</button>
+        <button onClick={()=>{
+          window.location.reload()
+        }} className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">Back</button>
+        <button onClick={()=>{
+          mydetails()
+        }} className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">My Orders</button>
       </div>
+      <ToastContainer />
       <div className='w-full max-lg:flex-col flex gap-5 px-5 max-sm:px-1 mt-5'>
-        <div className='w-1/2 max-lg:w-full px-4 max-sm:px-1 h-full flex flex-col gap-10 max-sm:gap-5'>
+        {!setFound && <div className='w-1/2 max-lg:w-full px-4 max-sm:px-1 h-full flex flex-col gap-10 max-sm:gap-5'>
           <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col'>
             <div className="relative inline-block w-full">
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select State</div>
@@ -177,10 +247,80 @@ const Display = () => {
           >
             Find Drivers
           </button>
-        </div>
+        </div>}
+        {setFound && <div className='w-1/2 max-lg:w-full px-4 max-sm:px-1 h-full flex flex-col gap-10 max-sm:gap-5'>
+          <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col'>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Selected State</div>
+              <button
+                className=" cursor-not-allowed w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
+              >
+                {selectedState}   </button>
+            </div>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Selected Date</div>
+              <button
+                className='cursor-not-allowed w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
+              >{date}</button>
+            </div>
+          </div>
+          <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col'>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>From</div>
+              <button
+                className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative cursor-not-allowed  `}
 
-        {processing ? (
-          <div className='w-1/2 max-lg:w-full h-[500px] flex items-center justify-center border-2 rounded-md border-[#0000008d]'>
+              >
+                {selectedCity}  </button>
+            </div>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>To</div>
+              <button
+                onClick={() => setIsCityOpen2(!isCityOpen2)}
+                className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative cursor-not-allowed `}
+              >
+                {selectedCity2}
+              </button>
+            </div>
+
+
+          </div>
+          <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col'>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Pickup point</div>
+              <input
+                value={pickup}
+                type='text'
+                required
+                onChange={(e) => {
+                  setpickup(e.target.value)
+                }}
+                className=" cursor-not-allowed w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative" />
+            </div>
+            <div className="relative inline-block w-full">
+              <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Seats</div>
+              <input
+                value={seat}
+                type='number'
+                required
+                onChange={(e) => {
+                  setseat(e.target.value)
+                }}
+                className='cursor-not-allowed w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
+              />
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              submittheorder()
+            }}
+            className='w-full items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] smooth hover:text-[#000000be] btnshad text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
+          >
+            BOOK
+          </button>
+        </div>}
+
+        {processing && <div className='w-1/2 max-lg:w-full h-[500px] flex items-center justify-center border-2 rounded-md border-[#0000008d]'>
             <div className="flex flex-col items-center">
               <div className="loader mb-4">
                 <div className="w-12 h-12 border-gradient-animate animate-spin"></div>
@@ -189,16 +329,17 @@ const Display = () => {
               <p className="text-[#000000be] text-md mt-2 font-semibold">Please wait a moment.</p>
             </div>
           </div>
-        ) : (
-          <div className='trips-list'>
+}
+         {found && <div className='trips-list'>
             <div className='text-center text-2xl font-bold'>Trips</div>
             {matches.length > 0 ? (
               <ul className='mt-5'>
                 {matches.map(trip => (
                   <li key={trip.id} className="flex justify-between items-center border-b py-2">
                     <div>
-                      <h3>On {trip.date} - Cost {trip.cost}</h3>
+                      <h3>On {trip.date} - Cost {trip.cost} -seats {trip.seats}</h3>
                       <p>{trip.form} to {trip.to}</p>
+                      <button onClick={() => handleapprove(trip.id)} className="text-green-500 ml-4">BOOK</button>
                     </div>
                   </li>
                 ))}
@@ -206,8 +347,48 @@ const Display = () => {
             ) : (
               <p>No trips available.</p>
             )}
-          </div>
-        )}
+          </div>}
+          {dis && <div>
+            <div className='mt-5'>
+                {values.length > 0 ? (
+                    <>
+                        <h3 className="font-bold">Approved Orders:</h3>
+                        <ul>
+                            {values
+                                .filter(client => client.approved)
+                                .map(client => (
+                                    <li key={client._id} className="flex justify-between items-center border-b py-2">
+                                        <div>
+                                            <h3>Seats: {client.seats}</h3>
+                                            <p>Pickup point: {client.pickuplocation}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                        </ul>
+
+                        <h3 className="font-bold mt-4">Unapproved Orders:</h3>
+                        <ul>
+                            {values
+                                .filter(client => !client.approved)
+                                .map(client => (
+                                    <li key={client._id} className="flex justify-between items-center border-b py-2">
+                                        <div>
+                                            <h3>Seats: {client.seats}</h3>
+                                            <p>Pickup point: {client.pickuplocation}</p>
+                                        </div>
+                                        <div>
+                                            <button onClick={() => {canceltheorder(client._id)}} className="text-red-500 ml-4">Cancel</button>
+                                        </div>
+                                    </li>
+                                ))}
+                        </ul>
+                    </>
+                ) : (
+                    <p>No values available.</p>
+                )}
+            </div>
+        </div>}
+        
       </div>
     </div>
   );

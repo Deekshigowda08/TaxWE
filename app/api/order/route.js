@@ -7,6 +7,7 @@ export async function POST(req){
     if (process.env) {
         console.log("done");
         await mongoose.connect(process.env.DB_URL)
+        
         const result = await list.findByIdAndUpdate(
             id,
             { $push: { clients: { client: userid,date, seats, pickuplocation } } },
