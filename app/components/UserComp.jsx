@@ -2,7 +2,7 @@
 import React,{useState,useEffect} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import cprofl from '../public/cat.jpeg'
+import cprofl from '../public/profilepic.png'
 import { IoMenu } from "react-icons/io5"; 
 import { jwtDecode } from "jwt-decode";
 
@@ -28,11 +28,8 @@ const UserComp = ({ username, email }) => {
                         <Link href={'#'} className='' >
                             <span className=''>PREVIOUS TRIPS</span>
                         </Link>
-                        <Link href={'/about'} className='' >
+                        <Link href={'/findplaces'} className='' >
                             <span className=''>FIND PLACES</span>
-                        </Link>
-                        <Link href={'/github'} className='' >
-                            <span className=''></span>
                         </Link>
                     </div>
 

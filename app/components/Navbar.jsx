@@ -17,7 +17,7 @@ const Navbar = () => {
                 <Link href={'/about'} className='' >
                     <span className='relative befaft p-1'>ABOUT</span>
                 </Link>
-                <Link href={'/github'} className='' >
+                <Link href={'/'} className='' >
                     <span className='relative befaft p-1'>GITHUB</span>
                 </Link>
                 {/* <Link href={'/passengersignup'} className='' >

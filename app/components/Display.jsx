@@ -51,51 +51,51 @@ const Display = ({ id }) => {
   const [values, setvalue] = useState([])
   const [pickup, setpickup] = useState("")
   const [found, setfound] = useState(false)
-  const submittheorder=async()=>{
-    const result=await fetch("/api/order", {
+  const submittheorder = async () => {
+    const result = await fetch("/api/order", {
       method: "post",
       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id:setselectedlist._id,userid:id,date,seats:seat,pickuplocation:pickup })
-  })
-  if(result.ok){
-    toast("Done!")
-    setTimeout(() => {
-      window.location.reload()
-    }, 2000);
+      body: JSON.stringify({ id: setselectedlist._id, userid: id, date, seats: seat, pickuplocation: pickup })
+    })
+    if (result.ok) {
+      toast("Done!")
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000);
+    }
   }
-  }
-  const canceltheorder=async(id)=>{
-    const result=await fetch("/api/cancelbyuser", {
+  const canceltheorder = async (id) => {
+    const result = await fetch("/api/cancelbyuser", {
       method: "post",
       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ id })
-  })
-  if(result.ok){
-    toast("Done your order had been canceled!")
-    setTimeout(() => {
-      window.location.reload()
-    }, 2000);
+    })
+    if (result.ok) {
+      toast("Done your order had been canceled!")
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000);
+    }
   }
-  }
-  const mydetails=async()=>{
-    const result=await fetch("/api/userrequest", {
+  const mydetails = async () => {
+    const result = await fetch("/api/userrequest", {
       method: "post",
       headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({id})
-  })
-  const value=await result.json()
-  setvalue(value.clientDetails)
-  setdis(true)
-  setfound(false)
+      body: JSON.stringify({ id })
+    })
+    const value = await result.json()
+    setvalue(value.clientDetails)
+    setdis(true)
+    setfound(false)
   }
   const handleapprove = (driverid) => {
     matches.map(trip => {
@@ -138,20 +138,22 @@ const Display = ({ id }) => {
     console.log(response.trips);
     setMatches(response.trips);
     setfound(true)
-    
+
     setProcessing(false);
   };
 
   return (
     <div className='w-full'>
-      <div className='px-5 max-sm:px-1 text-center font-bold text-4xl maintxt max-sm:text-2xl'>
-        Start a new trip!
-        <button onClick={()=>{
-          window.location.reload()
-        }} className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">Back</button>
-        <button onClick={()=>{
-          mydetails()
-        }} className="h-[10%] w-[20%] text-xl rounded-2xl text-black font-bold">My Orders</button>
+      <div className='px-10 py-2 max-sm:px-1 text-center font-bold text-4xl maintxt max-sm:text-2xl flex justify-center gap-20 max-md:gap-5'>
+        <div className=''>Start a new trip!</div>
+        <div className='flex gap-10 max-md:gap-2'>
+          <button onClick={() => {
+            window.location.reload()
+          }} className="max-md:text-sm text-xl rounded-2xl text-[#06e2ff] font-bold ">Back</button>
+          <button onClick={() => {
+            mydetails()
+          }} className="max-md:text-sm text-xl rounded-2xl text-[#06e2ff] font-bold ">My Orders</button>
+        </div>
       </div>
       <ToastContainer />
       <div className='w-full max-lg:flex-col flex gap-5 px-5 max-sm:px-1 mt-5'>
@@ -161,10 +163,10 @@ const Display = ({ id }) => {
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select State</div>
               <button
                 onClick={() => setIsStateOpen(!isStateOpen)}
-                className="w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
+                className="flex justify-between w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
               >
                 {selectedState}
-                <FaChevronDown className={`absolute inset-y-0 right-4 flex items-center text-white text-md transform transition-transform duration-300 ${isStateOpen ? "rotate-180" : "rotate-0"}`} />
+                <FaChevronDown className={`inset-y-0 right-4 flex items-center text-white text-md transform transition-transform duration-300 ${isStateOpen ? "rotate-180" : "rotate-0"}`} />
               </button>
               {isStateOpen && (
                 <ul className="absolute z-10 w-full bg-white selshad rounded-xl mt-2 overflow-auto max-h-40">
@@ -187,7 +189,7 @@ const Display = ({ id }) => {
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
                 required
-                className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
+                className=' w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
               />
             </div>
           </div>
@@ -196,11 +198,11 @@ const Display = ({ id }) => {
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>From</div>
               <button
                 onClick={() => setIsCityOpen(!isCityOpen)}
-                className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""}`}
+                className={`w-full max-sm:text-[16px] pr-10 border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-between ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""}`}
                 disabled={!selectedState}
               >
                 {selectedCity}
-                <FaChevronDown className={`absolute inset-y-0 right-4 flex items-center text-white text-md transform transition-transform duration-300 ${isCityOpen ? "rotate-180" : "rotate-0"}`} />
+                <FaChevronDown className={` inset-y-0 right-4 text-white text-md transform transition-transform duration-300 ${isCityOpen ? "rotate-180" : "rotate-0"}`} />
               </button>
               {isCityOpen && (
                 <ul className="absolute z-10 w-full bg-white selshad rounded-xl mt-2 overflow-auto max-h-40">
@@ -220,11 +222,11 @@ const Display = ({ id }) => {
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>To</div>
               <button
                 onClick={() => setIsCityOpen2(!isCityOpen2)}
-                className={`w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""}`}
+                className={`flex justify-between w-full max-sm:text-[16px] pr-10 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative ${!selectedState || selectedState === "Select State" ? "cursor-not-allowed opacity-50" : ""}`}
                 disabled={!selectedState || selectedState === "Select State"}
               >
                 {selectedCity2}
-                <FaChevronDown className={`absolute inset-y-0 right-4 flex items-center text-white text-md transform transition-transform duration-300 ${isCityOpen2 ? "rotate-180" : "rotate-0"}`} />
+                <FaChevronDown className={`inset-y-0 right-4 flex items-center text-white text-md transform transition-transform duration-300 ${isCityOpen2 ? "rotate-180" : "rotate-0"}`} />
               </button>
               {isCityOpen2 && (
                 <ul className="absolute z-10 w-full bg-white selshad rounded-xl mt-2 overflow-auto max-h-40">
@@ -320,75 +322,75 @@ const Display = ({ id }) => {
           </button>
         </div>}
 
-        {processing && <div className='w-1/2 max-lg:w-full h-[500px] flex items-center justify-center border-2 rounded-md border-[#0000008d]'>
-            <div className="flex flex-col items-center">
-              <div className="loader mb-4">
-                <div className="w-12 h-12 border-gradient-animate animate-spin"></div>
-              </div>
-              <h2 className="text-[#000000be] text-xl font-bold">Processing...</h2>
-              <p className="text-[#000000be] text-md mt-2 font-semibold">Please wait a moment.</p>
+        {processing && <div className='w-1/2 max-lg:w-full h-[500px] flex items-center justify-center'>
+          <div className="flex flex-col items-center">
+            <div className="loader mb-4">
+              <div className="w-12 h-12 border-gradient-animate animate-spin"></div>
             </div>
+            <h2 className="text-[#000000be] text-xl font-bold">Processing...</h2>
+            <p className="text-[#000000be] text-md mt-2 font-semibold">Please wait a moment.</p>
           </div>
-}
-         {found && <div className='trips-list'>
-            <div className='text-center text-2xl font-bold'>Trips</div>
-            {matches.length > 0 ? (
-              <ul className='mt-5'>
-                {matches.map(trip => (
-                  <li key={trip.id} className="flex justify-between items-center border-b py-2">
-                    <div>
-                      <h3>On {trip.date} - Cost {trip.cost} -seats {trip.seats}</h3>
-                      <p>{trip.form} to {trip.to}</p>
-                      <button onClick={() => handleapprove(trip.id)} className="text-green-500 ml-4">BOOK</button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No trips available.</p>
-            )}
-          </div>}
-          {dis && <div>
-            <div className='mt-5'>
-                {values.length > 0 ? (
-                    <>
-                        <h3 className="font-bold">Approved Orders:</h3>
-                        <ul>
-                            {values
-                                .filter(client => client.approved)
-                                .map(client => (
-                                    <li key={client._id} className="flex justify-between items-center border-b py-2">
-                                        <div>
-                                            <h3>Seats: {client.seats}</h3>
-                                            <p>Pickup point: {client.pickuplocation}</p>
-                                        </div>
-                                    </li>
-                                ))}
-                        </ul>
-
-                        <h3 className="font-bold mt-4">Unapproved Orders:</h3>
-                        <ul>
-                            {values
-                                .filter(client => !client.approved)
-                                .map(client => (
-                                    <li key={client._id} className="flex justify-between items-center border-b py-2">
-                                        <div>
-                                            <h3>Seats: {client.seats}</h3>
-                                            <p>Pickup point: {client.pickuplocation}</p>
-                                        </div>
-                                        <div>
-                                            <button onClick={() => {canceltheorder(client._id)}} className="text-red-500 ml-4">Cancel</button>
-                                        </div>
-                                    </li>
-                                ))}
-                        </ul>
-                    </>
-                ) : (
-                    <p>No values available.</p>
-                )}
-            </div>
+        </div>
+        }
+        {found && <div className='trips-list'>
+          <div className='text-center text-2xl max-md:text-lg font-bold'>Trips</div>
+          {matches.length > 0 ? (
+            <ul className='mt-5'>
+              {matches.map(trip => (
+                <li key={trip.id} className="flex justify-between items-center border-b py-2">
+                  <div>
+                    <h3>On {trip.date} - Cost {trip.cost} -seats {trip.seats}</h3>
+                    <p>{trip.form} to {trip.to}</p>
+                    <button onClick={() => handleapprove(trip.id)} className="text-green-500 ml-4">BOOK</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className='max-sm:text-sm'>No trips available.</p>
+          )}
         </div>}
-        
+        {dis && <div>
+          <div className='mt-5'>
+            {values.length > 0 ? (
+              <>
+                <h3 className="font-bold">Approved Orders:</h3>
+                <ul>
+                  {values
+                    .filter(client => client.approved)
+                    .map(client => (
+                      <li key={client._id} className="flex justify-between items-center border-b py-2">
+                        <div>
+                          <h3>Seats: {client.seats}</h3>
+                          <p>Pickup point: {client.pickuplocation}</p>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+
+                <h3 className="font-bold mt-4">Unapproved Orders:</h3>
+                <ul>
+                  {values
+                    .filter(client => !client.approved)
+                    .map(client => (
+                      <li key={client._id} className="flex justify-between items-center border-b py-2">
+                        <div>
+                          <h3>Seats: {client.seats}</h3>
+                          <p>Pickup point: {client.pickuplocation}</p>
+                        </div>
+                        <div>
+                          <button onClick={() => { canceltheorder(client._id) }} className="text-red-500 ml-4">Cancel</button>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              </>
+            ) : (
+              <p>No values available.</p>
+            )}
+          </div>
+        </div>}
+
       </div>
     </div>
   );
