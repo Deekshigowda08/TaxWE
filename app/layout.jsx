@@ -13,7 +13,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "TaxWE-travelling made right",
+  title: "TaxWE - Travelling Made Right",
   description: "Discover a seamless travel experience with TaxWE. From easy bookings to efficient trip management, we make travelling simple, reliable, and enjoyable for everyone.",
 };
 
