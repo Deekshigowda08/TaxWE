@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import UserComp from "../components/UserComp";
 import Display from "../components/Display";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from 'react';
 import { useEffect ,useState} from "react";
 import { jwtDecode } from "jwt-decode";
 export default function Home() {
@@ -22,10 +23,12 @@ export default function Home() {
     }
   }, [token]);
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <>
       <Navbar />
       <UserComp username={username} email={email}/>
       <Display id={id} />
     </>
+    </Suspense>
   );
 }

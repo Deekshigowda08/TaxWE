@@ -8,6 +8,8 @@ import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form"
+import { Suspense } from 'react';
+
 
 const stateCityData = {
     "Andhra Pradesh": ["Amaravati", "Visakhapatnam", "Vijayawada"],
@@ -198,6 +200,8 @@ export default function Home() {
 
     }
     return (
+        <Suspense fallback={<div>Loading...</div>}>
+
         <>
             <Navbar />
             <ToastContainer />
@@ -448,5 +452,7 @@ export default function Home() {
                 </div>
             </form>
         </>
+        </Suspense>
+
     );
 }
