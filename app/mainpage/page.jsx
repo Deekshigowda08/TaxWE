@@ -36,7 +36,7 @@ import { jwtDecode } from "jwt-decode";
 
   );
 }
-export function Home() {
+export default function Home() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Searchbar />
