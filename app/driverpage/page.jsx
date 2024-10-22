@@ -315,13 +315,13 @@ export default function Home() {
 
                                 <div className="relative inline-block w-full">
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Enter number of Seats</div>
-                                    <input {...register("seats", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="number" />
+                                    <input {...register("seats", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="tel" />
                                     {errors.seats && <span className="text-red-500">seats is required</span>}
                                 </div>
 
                                 <div className="relative inline-block w-full">
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Avalibility of Seats</div>
-                                    <input {...register("avalible", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="number" />
+                                    <input {...register("avalible", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="tel" />
                                     {errors.avalible && <span className="text-red-500">Avalibility of Seats is required</span>}
                                 </div>
                             </div>
@@ -329,13 +329,13 @@ export default function Home() {
 
                                 <div className="relative inline-block w-full">
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Enter the cost of one seat</div>
-                                    <input {...register("cost", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="number" />
+                                    <input {...register("cost", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="tel" />
                                     {errors.cost && <span className="text-red-500">cost is required</span>}
                                 </div>
 
                                 <div className="relative inline-block w-full">
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Contact Number</div>
-                                    <input {...register("number", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="number" />
+                                    <input {...register("number", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="tel" />
                                     {errors.number && <span className="text-red-500">Contact Number is required</span>}
                                 </div>
                             </div>

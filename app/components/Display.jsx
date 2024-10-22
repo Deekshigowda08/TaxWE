@@ -303,7 +303,7 @@ const Display = ({ id }) => {
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Seats</div>
               <input
                 value={seat}
-                type='number'
+                type='tel'
                 required
                 onChange={(e) => {
                   setseat(e.target.value)
