@@ -7,21 +7,26 @@ import { Suspense } from 'react';
 import { useEffect ,useState} from "react";
 import { jwtDecode } from "jwt-decode";
  function Searchbar() {
-  const [username, setSetUsername] = useState("")
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
-  const [id, setid] = useState("")
+  const [id,  setId] = useState("")
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token, '@teamwe_08'); 
-      setSetUsername(decoded.username);
-      setEmail(decoded.email);
-      setid(decoded.objectid)
-    }else{
-      window.location.replace(`/`)
-    }
-  }, [token]);
+      try {
+        if (token) {
+          const decoded = jwtDecode(token);
+          setUsername(decoded.username);
+          setEmail(decoded.email);
+          setId(decoded.objectid);
+        } else {
+          window.location.replace(`/`);
+        }
+      } catch (error) {
+        console.error("Token decoding failed:", error);
+        window.location.replace(`/`);
+      }
+    }, [token]);
   return (
     <>
       <Navbar />

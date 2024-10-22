@@ -55,21 +55,26 @@ const stateCityData = {
         formState: { errors },
     } = useForm()
 
-    const [username, setSetUsername] = useState("")
+    const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [id, setid] = useState("")
+    const [id, setId] = useState("")
     const searchParams = useSearchParams()
     const token = searchParams.get('token')
     useEffect(() => {
-        if (token) {
-            const decoded = jwtDecode(token, '@teamwe_08');
-            setSetUsername(decoded.username);
-            setEmail(decoded.email);
-            setid(decoded.objectid)
-        } else {
-            window.location.replace(`/`)
-        }
-    }, []);
+        try {
+            if (token) {
+              const decoded = jwtDecode(token);
+              setUsername(decoded.username);
+              setEmail(decoded.email);
+              setId(decoded.objectid);
+            } else {
+              window.location.replace(`/`);
+            }
+          } catch (error) {
+            console.error("Token decoding failed:", error);
+            window.location.replace(`/`);
+          }
+        }, [token]);
     const handlereject = async (userid) => {
         await fetch("/api/cancelbydriver", {
             method: "post",
