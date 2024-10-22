@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react';
 import { useEffect ,useState} from "react";
 import { jwtDecode } from "jwt-decode";
-export default function Home() {
+ function Searchbar() {
   const [username, setSetUsername] = useState("")
   const [email, setEmail] = useState("")
   const [id, setid] = useState("")
@@ -23,12 +23,18 @@ export default function Home() {
     }
   }, [token]);
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <>
       <Navbar />
       <UserComp username={username} email={email}/>
       <Display id={id} />
     </>
-    </Suspense>
+
   );
+}
+export function Home() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Searchbar />
+    </Suspense>
+  )
 }

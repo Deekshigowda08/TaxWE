@@ -41,7 +41,7 @@ const stateCityData = {
     "Uttarakhand": ["Dehradun", "Haridwar", "Nainital"],
     "West Bengal": ["Kolkata", "Siliguri", "Durgapur"],
 };
-export default function Home() {
+ function Searchbar() {
     const [order, setorder] = useState(false)
 
     const displaytrips = () => {
@@ -200,7 +200,6 @@ export default function Home() {
 
     }
     return (
-        <Suspense fallback={<div>Loading...</div>}>
 
         <>
             <Navbar />
@@ -452,7 +451,13 @@ export default function Home() {
                 </div>
             </form>
         </>
-        </Suspense>
 
     );
 }
+export function Home() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Searchbar />
+      </Suspense>
+    )
+  }
