@@ -67,6 +67,9 @@ const Display = ({ id }) => {
       }, 2000);
     }
   }
+  const [dates, setDates] = useState('');
+
+  const today = new Date().toISOString().split('T')[0];
   const canceltheorder = async (id) => {
     const result = await fetch("/api/cancelbyuser", {
       method: "post",
@@ -185,12 +188,13 @@ const Display = ({ id }) => {
             <div className="relative inline-block w-full">
               <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Date</div>
               <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                required
-                className=' w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
-              />
+        type="date"
+        value={dates}
+        onChange={(e) => setDates(e.target.value)}
+        required
+        min={today} // Set minimum date to today
+        className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out'
+      />
             </div>
           </div>
           <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col'>

@@ -57,6 +57,8 @@ const stateCityData = {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [id, setId] = useState("")
+    const [date, setDate] = useState('');
+  const today = new Date().toISOString().split('T')[0];
     const token = (typeof window !== "undefined" && localStorage) ? localStorage.getItem('drivertoken') : "";
 
     useEffect(() => {
@@ -220,7 +222,8 @@ const stateCityData = {
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px] '>Select State</div>
                                     <button
                                         onClick={() => setIsStateOpen(!isStateOpen)}
-                                        className="w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
+                                        className="w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8]
+                                         text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"
                                     >
                                         {selectedState}
                                         <span className="absolute inset-y-0 right-4 flex items-center text-white text-md">
@@ -247,7 +250,7 @@ const stateCityData = {
 
                                 <div className="relative inline-block w-full">
                                     <div className='text-[#000000bb] text-lg font-bold max-sm:text-[16px]'>Select Date</div>
-                                    <input {...register("date", { required: true })} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="date" />
+                                    <input {...register("date", { required: true })} min={today} required className='w-full pr-10 max-sm:text-[15px] max-sm:pr-5 max-sm:px-1 items-center border-2 bg-gradient-to-r from-[#0ab9cf] to-[#3581d8] text-white text-md font-bold py-3 px-4 rounded-lg transition-all duration-300 ease-in-out relative"' type="date" />
                                     {errors.date && <span className="text-red-500">Date is required</span>}</div>
                             </div>
                             <div className='flex w-full gap-10 max-lg:gap-2 max-sm:flex-col '>
