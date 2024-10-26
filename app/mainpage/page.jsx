@@ -2,7 +2,6 @@
 import Navbar from "../components/Navbar";
 import UserComp from "../components/UserComp";
 import Display from "../components/Display";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from 'react';
 import { useEffect ,useState} from "react";
 import { jwtDecode } from "jwt-decode";
@@ -10,8 +9,8 @@ import { jwtDecode } from "jwt-decode";
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [id,  setId] = useState("")
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+  const token = (typeof window !== "undefined" && localStorage) ? localStorage.getItem('Token') : "hhh";
+  console.log(token);
   useEffect(() => {
       try {
         if (token) {

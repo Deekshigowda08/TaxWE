@@ -41,12 +41,12 @@ const page = () => {
       <div className='fixed top-7 left-7 max-sm:top-2 max-sm:right-2'>
         <Image src={taxwelogo} width={120} className='max-md:w-[80px]' />
       </div>
-      <div className='flex flex-col'>
+      <div className='flex h-[90vh] flex-col'>
       <ToastContainer />
         <div className='p-2 text-2xl font-bold text-[#ffffff] max-sm:text-lg'>Sign up as a DRIVER</div>
 
 
-        <form onSubmit={handleSubmit(onSubmit)} className="w-[450px] max-sm:w-[300px] px-7 py-10 max-sm:px-2 max-sm:py-4 bg-[#ffffff2d] max-sm:text-sm rounded-xl lsshad flex flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-[450px] max-sm:w-[300px] h-[80vh] example overflow-auto px-7 py-10 max-sm:px-2 max-sm:py-4 bg-[#ffffff2d] max-sm:text-sm rounded-xl lsshad flex flex-col">
           <div className="mb-4">
             <label className="block text-[#ffffffe5] max-sm:text-sm text-lg font-bold mb-1" htmlFor="email">
               Email

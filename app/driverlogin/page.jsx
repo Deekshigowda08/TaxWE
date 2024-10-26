@@ -53,7 +53,7 @@ const page = () => {
     
         if (result.success) {
           
-          window.location.replace(`/driverpage?token=${token}`)
+          window.location.replace(`/driverpage`)
         } else {
           console.error('Login failed:', result.message);
         }
@@ -82,7 +82,7 @@ const page = () => {
       const tok = localStorage.getItem('drivertoken');
       toast("Success")
       setTimeout(() => {
-        window.location.replace(`/driverpage?token=${tok}`)
+        window.location.replace(`/driverpage`)
       }, 500);}
       else{
       toast.error(result.error)

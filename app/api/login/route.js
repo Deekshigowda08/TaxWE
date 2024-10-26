@@ -32,7 +32,7 @@ export async function POST(req){
         console.log();
          if(payload.email== driveraccount.email && payload.password==originalText){
             var token = jwt.sign({objectid:driveraccount._id,email:driveraccount.email,username:driveraccount.username,password:driveraccount.password,usertype:driveraccount.usertype}, '@teamwe_08');
-             return NextResponse.json({success:true,email:driveraccount.email,username:driveraccount.username,token:token});
+            return NextResponse.json({success:true,email:driveraccount.email,username:driveraccount.username,token:token});
  
          }
          else{

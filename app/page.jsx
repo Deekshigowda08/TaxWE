@@ -53,7 +53,7 @@ const page = () => {
     
         if (result.success) {
           
-          window.location.replace(`/mainpage?token=${token}`)
+          window.location.replace(`/mainpage`)
         } else {
           console.error('Login failed:', result.message);
         }
@@ -82,7 +82,7 @@ const page = () => {
       const tok = localStorage.getItem('Token');
       toast("Success")
       setTimeout(() => {
-        window.location.replace(`/mainpage?token=${tok}`)
+        window.location.replace(`/mainpage`)
       }, 500);}
       else{
       toast.error(result.error)

@@ -350,7 +350,7 @@ const Display = ({ id }) => {
             <p className='max-sm:text-sm'>No trips available.</p>
           )}
         </div>}
-        {dis && <div>
+        {(dis ) && <div>
           <div className='mt-5'>
             {values.length > 0 ? (
               <>

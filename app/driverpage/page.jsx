@@ -1,7 +1,6 @@
 "use client"
 import Navbar from "../components/Navbar";
 import UserComp from "../components/UserComp";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaChevronDown } from 'react-icons/fa'
 import { jwtDecode } from "jwt-decode";
@@ -58,8 +57,8 @@ const stateCityData = {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [id, setId] = useState("")
-    const searchParams = useSearchParams()
-    const token = searchParams.get('token')
+    const token = (typeof window !== "undefined" && localStorage) ? localStorage.getItem('drivertoken') : "";
+
     useEffect(() => {
         try {
             if (token) {
