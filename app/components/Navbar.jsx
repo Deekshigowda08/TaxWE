@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import taxwelogo from '../public/taxwelogo2.svg'
+import { LogOutIcon } from 'lucide-react'
 
 const Navbar = () => {
     const handlelogout=()=>{
@@ -26,7 +27,7 @@ const Navbar = () => {
                     <span className='relative befaft p-1'>ABOUT</span>
                 </Link>
                 <Link href={'/'} className='' >
-                    <button onClick={handlelogout} className='relative befaft p-1'>Logout</button>
+                    <button onClick={handlelogout} className='relative befaft p-1'><LogOutIcon/></button>
                 </Link>
             </div>
         </nav>
